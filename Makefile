@@ -1,6 +1,6 @@
 NAME = devops/openresty-oauth-proxy
 REGISTRY = registry.example.com
-VERSION=1.11.2.2-r7
+VERSION=1.11.2.4-r1
 TAG = $(REGISTRY)/$(NAME):$(VERSION)
 
 default: build

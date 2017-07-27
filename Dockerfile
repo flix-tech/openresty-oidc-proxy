@@ -1,4 +1,4 @@
-FROM openresty/openresty:1.11.2.2-alpine
+FROM openresty/openresty:1.11.2.4-alpine
 
 ENV \
  SESSION_VERSION=2.15 \
