@@ -29,5 +29,5 @@ if err then
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
-ngx.var.user_email = session.data.user.upn
-ngx.var.user_name = string.lower(session.data.user.given_name .. '.' .. session.data.user.family_name)
+if ngx.var.user_email then ngx.var.user_email = res.user.upn end
+if ngx.var.user_name  then ngx.var.user_name = string.lower(res.user.given_name .. '.' .. res.user.family_name) end
