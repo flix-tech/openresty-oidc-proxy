@@ -28,3 +28,6 @@ if err then
     ngx.say("There was an error while logging in: " .. html_escape(err) .. "<br><a href='" .. html_escape(url) .. "'>Please try again.</a>")
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
+
+ngx.var.user_email = session.data.user.upn
+ngx.var.user_name = string.lower(session.data.user.given_name .. '.' .. session.data.user.family_name)
