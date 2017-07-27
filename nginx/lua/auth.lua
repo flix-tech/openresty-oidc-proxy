@@ -7,6 +7,17 @@ local opts = {
     iat_slack = 600,
 }
 
+local function html_escape(s)
+    return (string.gsub(s, "[}{\">/<'&]", {
+        ["&"] = "&amp;",
+        ["<"] = "&lt;",
+        [">"] = "&gt;",
+        ['"'] = "&quot;",
+        ["'"] = "&#39;",
+        ["/"] = "&#47;"
+    }))
+end
+
 -- call authenticate for OpenID Connect user authentication
 local res, err = require("resty.openidc").authenticate(opts)
 
@@ -14,6 +25,6 @@ if err then
     ngx.status = 500
     ngx.header.content_type = 'text/html';
 
-    ngx.say("There was an error while logging in: " .. err .. "<br><a href='" .. url .. "'>Please try again.</a>")
+    ngx.say("There was an error while logging in: " .. html_escape(err) .. "<br><a href='" .. html_escape(url) .. "'>Please try again.</a>")
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
