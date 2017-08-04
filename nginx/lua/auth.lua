@@ -1,3 +1,8 @@
+local features = {}
+for f in string.gmatch(os.getenv("OID_FEATURES") or "", "[^,]+") do
+    features[f] = true
+end
+
 local opts = {
     redirect_uri_path = os.getenv("OID_REDIRECT_PATH"),
     discovery = os.getenv("OID_DISCOVERY"),
@@ -5,6 +10,7 @@ local opts = {
     client_secret = os.getenv("OID_CLIENT_SECRET"),
     scope = "openid",
     iat_slack = 600,
+    features_enabled = features,
 }
 
 local function html_escape(s)
@@ -29,5 +35,7 @@ if err then
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
-if ngx.var.user_email then ngx.var.user_email = res.user.upn end
-if ngx.var.user_name  then ngx.var.user_name = string.lower(res.user.given_name .. '.' .. res.user.family_name) end
+if features.user then
+    if ngx.var.user_email then ngx.var.user_email = res.user.upn end
+    if ngx.var.user_name  then ngx.var.user_name = string.lower(res.user.given_name .. '.' .. res.user.family_name) end
+end
