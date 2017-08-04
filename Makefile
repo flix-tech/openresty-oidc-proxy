@@ -1,6 +1,6 @@
 NAME = devops/openresty-oauth-proxy
 REGISTRY = registry.example.com
-VERSION=1.11.2.4-r5
+VERSION=1.11.2.4-r6
 TAG = $(REGISTRY)/$(NAME):$(VERSION)
 
 default: build lua-resty-openidc/lib/resty/openidc.lua
