@@ -14,6 +14,7 @@ local opts = {
 }
 
 local function html_escape(s)
+    if not s then return "" end
     return (string.gsub(s, "[}{\">/<'&]", {
         ["&"] = "&amp;",
         ["<"] = "&lt;",
