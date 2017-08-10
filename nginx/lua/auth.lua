@@ -32,7 +32,7 @@ if err then
     ngx.status = 500
     ngx.header.content_type = 'text/html';
 
-    ngx.say("There was an error while logging in: " .. html_escape(err) .. "<br><a href='" .. html_escape(url) .. "'>Please try again.</a>")
+    ngx.say("There was an error while logging in: " .. html_escape(err) .. "<br><a href='/'>Please try again.</a>")
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
