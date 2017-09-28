@@ -10,7 +10,7 @@ local opts = {
     client_secret = os.getenv("OID_CLIENT_SECRET"),
     scope = "openid",
     iat_slack = 600,
-    features_enabled = features,
+    session_contents = features,
 }
 
 local function html_escape(s)
