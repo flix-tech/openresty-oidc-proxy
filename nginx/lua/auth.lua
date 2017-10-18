@@ -1,6 +1,9 @@
-local features = {}
-for f in string.gmatch(os.getenv("OID_FEATURES") or "", "[^,]+") do
-    features[f] = true
+
+if not features then
+    features = {}
+    for f in string.gmatch(os.getenv("OID_FEATURES") or "", "[^,]+") do
+        features[f] = true
+    end
 end
 
 local opts = {
