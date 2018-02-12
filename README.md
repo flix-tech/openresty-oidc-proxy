@@ -1,3 +1,5 @@
+An authentication reverse proxy that is based on https://github.com/zmartzone/lua-resty-openidc
+
 # Usage
 You can pull it from: https://hub.docker.com/r/flixtech/openresty-oidc-proxy/
 
