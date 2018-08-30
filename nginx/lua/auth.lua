@@ -44,6 +44,6 @@ if features.user then
     if ngx.var.user_name then
       ngx.var.user_name = ( res.user.given_name and res.user.family_name )
         and string.lower( res.user.given_name .. '.' .. res.user.family_name )
-        or 'unnamed'
+        or res.user.upn
     end
 end
