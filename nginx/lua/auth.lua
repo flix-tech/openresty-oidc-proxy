@@ -1,4 +1,15 @@
 
+function is_authenticated()
+  local session = require("resty.session").start()
+
+  -- if we have no id_token then redirect to the OP for authentication
+  if not session.present or not (session.data.id_token or session.data.authenticated) then
+    return false
+  end
+  return true
+end
+
+
 if not features then
     features = {}
     for f in string.gmatch(os.getenv("OID_FEATURES") or "", "[^,]+") do
@@ -26,6 +37,13 @@ local function html_escape(s)
         ["'"] = "&#39;",
         ["/"] = "&#47;"
     }))
+end
+
+if not is_authenticated() and string.lower(ngx.header.http_x_requested_with) == "xmlhttprequest" then
+    ngx.status = 401
+    ngx.header.content_type = 'text/html';
+    ngx.say("Unauthenticated AJAX request. Please (re-)load the page to be authenticated.")
+    ngx.exit(ngx.HTTP_UNAUTHORIZED)
 end
 
 -- call authenticate for OpenID Connect user authentication
