@@ -3,7 +3,7 @@ function is_authenticated()
   local session = require("resty.session").start()
 
   -- if we have no id_token then redirect to the OP for authentication
-  if not session.present or not (session.data.id_token or session.data.authenticated) then
+  if session == nil or not session.present or not (session.data.id_token or session.data.authenticated) then
     return false
   end
   return true
