@@ -39,7 +39,7 @@ local function html_escape(s)
     }))
 end
 
-if not is_authenticated() and string.lower(ngx.header.http_x_requested_with) == "xmlhttprequest" then
+if not is_authenticated() and ngx.header.http_x_requested_with and string.lower(ngx.header.http_x_requested_with) == "xmlhttprequest" then
     ngx.status = 401
     ngx.header.content_type = 'text/html';
     ngx.say("Unauthenticated AJAX request. Please (re-)load the page to be authenticated.")
